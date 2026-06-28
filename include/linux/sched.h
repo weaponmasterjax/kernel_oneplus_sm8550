@@ -1077,8 +1077,8 @@ struct task_struct {
 	struct nameidata		*nameidata;
 
 #ifdef CONFIG_SYSVIPC
-	// struct sysv_sem			sysvsem;
-	// struct sysv_shm			sysvshm;
+	struct sysv_sem			sysvsem;
+	struct sysv_shm			sysvshm;
 #endif
 #ifdef CONFIG_DETECT_HUNG_TASK
 	unsigned long			last_switch_count;
@@ -1511,14 +1511,9 @@ struct task_struct {
 	struct callback_head		l1d_flush_kill;
 #endif
 
-#ifdef CONFIG_SYSVIPC
-	ANDROID_KABI_USE(1, struct sysv_sem sysvsem);
-	_ANDROID_KABI_REPLACE(ANDROID_KABI_RESERVE(2); ANDROID_KABI_RESERVE(3), struct sysv_shm sysvshm);
-#else
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
-#endif
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);
 	ANDROID_KABI_RESERVE(6);
